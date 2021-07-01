@@ -1,0 +1,19 @@
+form{
+    width: 350px;
+    margin:100px auto 0;
+}
+form input,form button{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin: 10px 0;
+}
+form button{
+    width: 360px;
+    background-color: seagreen;
+    color: #fff;
+    outline: none;
+    border: none;
+}
+
