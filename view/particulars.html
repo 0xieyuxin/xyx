@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
     <header></header>
-
-    <form action="">
-
-        <input type="text" name="" id="" placeholder="用户名"> <span>用户名可用</span>
-        <input type="password" name="" id="" placeholder="密码"><span>密码正确</span>
-
-        <button>登录</button>
-    </form>
 </body>
 <script src="../js/animation.js"></script>
-<script src="../js/login.js"></script>
+<script src="../js/request.js"></script>
+<script>
+    nav();
+    REQUEST.get('/detail',{
+        params:{
+            Id:100
+        }
+    },function(data){
+        console.log(data);
+    })
+</script>
 </html>

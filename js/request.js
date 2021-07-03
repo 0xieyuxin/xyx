@@ -5,7 +5,7 @@
  */
 
 function axios(config) {
-    console.log('axiosx==============config默认配置项', config)
+    // console.log('axiosx==============config默认配置项', config)
     // 初始化构造函数
     this.default = config;
     // 添加网络通信实例：请求 和 响应
@@ -20,8 +20,8 @@ function axios(config) {
 }
 
 axios.prototype.request = function (config) {
-    console.log(config);
-    console.log(`发起了请求，请求类型为 ${config.method}`);
+    // console.log(config);
+    // console.log(`发起了请求，请求类型为 ${config.method}`);
 
     var url = this.default.baseurl + config.url;
     var xhr = new XMLHttpRequest();
