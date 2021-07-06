@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .list {
+            width: 1200px;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .list .listitem {
+            display: inline-block;
+            margin: 3px 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <div class="list"></div>
+</body>
+<script src="../js/animation.js"></script>
+<script src="../js/request.js"></script>
+<script src="../js/underscore.js"></script>
+<script>
+    nav();
+    var list = document.querySelector('.list');
+    var url = location.href;
+    // 传入的值
+    var res = text(url);
+    console.log(res.length);
+    console.log(res);
+    // function word(){}
+    REQUEST.get('/search', {
+        params: {
+            word: res
+        }
+    }, function (data) {
+        console.log(data);
+        for (var j = 0; j < data.length; j++) {
+            
+            list.innerHTML += `
+         <div class="listitem" data-id="${data[j].Id}">
+        <div class="list-img">
+        <img alt="" src="${data[j].img_list_url}">
+            </div>
+            <div class="title">
+        <p>${data[j].title}</p>
+            </div>
+            <div class="text">
+        <span class="price">￥${data[j].price}</span>
+        <span>${data[j].mack}</span>
+        </div>
+        </div>
+         `
+        }
+    })
+
+
+</script>
+
+</html>

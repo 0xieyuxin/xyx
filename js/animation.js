@@ -33,15 +33,15 @@ function nav() {
     </ul>
 </nav>
     `
-    var nav=document.querySelector('nav');
-    var search=document.querySelector('search');
-    window.onscroll=function(){
-        if(document.documentElement.scrollTop>100){
-            nav.classList.add('fix');
-        }else{
-            nav.classList.remove('fix');
-            console.log(1)
+    // var nav=document.querySelector('nav');
+    // var search=document.querySelector('search');
+    // window.onscroll=function(){
+    //     if(document.documentElement.scrollTop>100){
+    //         nav.classList.add('fix');
+    //     }else{
+    //         nav.classList.remove('fix');
+    //         console.log(1)
 
-        }
-    }
+    //     }
+    // }
 }

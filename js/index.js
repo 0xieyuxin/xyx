@@ -3,10 +3,14 @@ nav();
 // 商品列表
 var shopList = document.querySelector('.shopList');
 var back = document.querySelector('.back');
-
+var input=document.querySelector('.search input');
+var btn=document.querySelector('.search button');
+var load=document.querySelector('.load');
+// 点击 获取当前点击的文字
+var navlist = document.querySelector('.navlist');
 var page = 1;
-
 add(page);
+
 window.onscroll = function () {
     var top = document.documentElement.scrollTop;
     // 返回顶部
@@ -22,6 +26,7 @@ window.onscroll = function () {
         }, 16.5)
     }
 
+    // 图片懒加载
     var img = document.querySelectorAll('.list-img img');
     var imgs = img[img.length - 1];
     for (var i = 0; i < img.length; i++) {
@@ -29,56 +34,72 @@ window.onscroll = function () {
             img[i].src = img[i].dataset.src;
         }
     }
-    // 判断30条数据触底
-    var load = document.createElement('div');
-    if (window.innerHeight + top >= imgs.offsetTop + imgs.offsetHeight) {
-        load.className = "load";
-        load.style.top = top + "px";
-        load.innerHTML = `
-        <img src="../asses/images/loading.jpg" alt="">
-            
-            `
-        document.body.appendChild(load);
+
+    // 判断数据触底
+    if (Math.abs((window.innerHeight + top)-document.body.scrollHeight)<50) {
         setTimeout(function () {
-            load.style.display = 'none'
+            // load.style.display="block";
             page++;
-            add(page)
+            add(page);
         }, 2000)
+
     }
 }
 function add(page) {
-
     REQUEST.get('/goodlist', {
         params: {
-            page: page
+            page: page,
         }
     }, function (data) {
         console.log(data);
         var html = shopList.innerHTML;
         for (var i = 0; i < data.length; i++) {
             html += `
-        <div class="listitem">
+        <div class="listitem" data-id="${data[i].Id}">
         <div class="list-img">
         <img src="../asses/images/loading.jpg" alt="" data-src="${data[i].img_list_url}">
-    </div>
-    <div class="title">
+            </div>
+            <div class="title">
         <p>${data[i].title}</p>
-    </div>
-    <div class="text">
+            </div>
+            <div class="text">
         <span class="price">￥${data[i].price}</span>
         <span>${data[i].mack}</span>
-    </div>
-    </div>
+        </div>
+        </div>
         `
             shopList.innerHTML = html;
         }
+        var items = document.querySelectorAll('.listitem');
+        for (let i = 0; i < items.length; i++) {
+            items[i].onclick = function (e) {
+                console.log("sdf");
+                //  获取当前点击的自定义属性
+                var id = items[i].getAttribute('data-id');
+
+                // var id=e.target.dataset.id;
+                location.href = `./detail.html?goodId=${id}`;
+            }
+        }
+
 
     })
 }
 
+// 导航栏url传值
+var lis = document.querySelectorAll('.navlist li a');
+var list;
+for (var i = 0; i < lis.length; i++) {
+    lis[i].index = i;
+    lis[i].onclick = function (e) {
+        e.preventDefault();
+        list = this.innerHTML;
+        console.log(list);
+        list=encodeURI(list)
+        location.href=`./classification.html?type_one=${list}`
+    }
 
-
-
+}
 
 //轮播图
 var swiper = document.querySelector('.swiper');
@@ -174,3 +195,9 @@ function change() {
 swipers();
 
 
+// 搜索
+btn.onclick=function(){
+    console.log(input.value);
+    var text=encodeURI(input.value)
+    location.href=`./search.html?word=${text}`
+}

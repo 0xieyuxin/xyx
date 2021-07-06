@@ -23,3 +23,23 @@ function format(){
     console.log(res);
 }
 format();
+
+function getUrl(url) {
+    var res = {};
+    var urlstr = url.slice(url.indexOf('?') + 1);
+    var str = urlstr.split('&');
+    for (var i = 0; i < str.length; i++) {
+        var index = str[i].indexOf('=');
+        var key = str[i].slice(0, index);
+        var value = str[i].slice(index + 1);
+        console.log(key, value);
+        res[key] = value;
+    }
+    return res;
+}
+
+function text(url){
+    var strurl = url.slice(url.indexOf('=') + 1);
+    var str = decodeURI(strurl);
+    return str;
+}

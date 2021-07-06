@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,17 +9,56 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/register.css">
 </head>
+
 <body>
     <header></header>
 
     <form action="">
 
-        <input type="text" name="" id="" placeholder="用户名"> <span>用户名可用</span>
-        <input type="password" name="" id="" placeholder="密码"><span>密码正确</span>
+        <input type="text" name="" id="user" placeholder="用户名"><span class="u"></span>
+        <input type="text" name="" id="pwd" placeholder="密码"><span class="p"></span>
 
         <button>注册</button>
     </form>
 </body>
-    <script src="../js/animation.js"></script>
-    <script src="../js/login.js"></script>
+<script src="../js/animation.js"></script>
+<script src="../js/login.js"></script>
+<script>
+    var user = document.querySelector('#user');
+    var pwd = document.querySelector('#pwd');
+    var uspan = document.querySelector('.u');
+    var pspan = document.querySelector('.p');
+    // 判断用户名的正则
+    var res = /^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{1,16}$/;
+    // 判断密码的正则
+    var mi =/^(?!^[0-9]+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z_]{6,16}$/;
+    // 判断是否符合 规则
+
+        var uvalue = user.value;
+        console.log(uvalue);
+        var pvalue = pwd.value;
+
+        user.onblur = function () {
+            console.log(res.test(uvalue));
+            if (res.test(uvalue)) {
+                uspan.innerHTML = "用户名可用";
+                uspan.style.color = "black";
+            } else {
+                uspan.innerHTML = "限16个字符，支持中英文、数字、减号或下划线";
+                uspan.style.color = "red";
+            }
+        }
+
+        pwd.onblur = function () {
+            console.log(mi.test(pvalue));
+            if (mi.test(pvalue)) {
+                pspan.innerHTML = "密码可用";
+                pspan.style.color = "black";
+            } else {
+                pspan.innerHTML = "密码格式不正确，不能是纯数字或者纯字母，不能包含特殊字符，密码长度在6~16位之间";
+                pspan.style.color = "red";
+            }
+        }
+</script>
+
 </html>
