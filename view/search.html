@@ -38,7 +38,6 @@
     var res = text(url);
     console.log(res.length);
     console.log(res);
-    // function word(){}
     REQUEST.get('/search', {
         params: {
             word: res
@@ -48,7 +47,7 @@
         for (var j = 0; j < data.length; j++) {
             
             list.innerHTML += `
-         <div class="listitem" data-id="${data[j].Id}">
+        <div class="listitem" data-id="${data[j].Id}">
         <div class="list-img">
         <img alt="" src="${data[j].img_list_url}">
             </div>
@@ -60,7 +59,7 @@
         <span>${data[j].mack}</span>
         </div>
         </div>
-         `
+        `
         }
     })
 

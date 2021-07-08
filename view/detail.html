@@ -8,15 +8,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/common.css">
     <style>
-        header {
-            height: 184px;
+        .detail {
+            width: 1000px;
+            margin: 30px auto 0;
+            background-color: plum;
+            display: flex;
         }
 
         .box {
-            width: 1000px;
+            /* width: 500px; */
             height: 500px;
             border: 1px solid #000;
-            margin: auto;
             position: relative;
 
         }
@@ -25,6 +27,7 @@
             width: 1000px;
             border: 1px solid #000;
             margin: auto;
+            overflow: hidden;
         }
 
         .big,
@@ -75,14 +78,81 @@
         .imgs img {
             width: 100%;
         }
+
+        /*  相关 */
+        .more .listitem {
+            width: 200px;
+            height: 300px;
+            /* display: inline-block; */
+            margin: 5px 20px;
+            float: left;
+            border: 1px solid #000;
+        }
+
+        .more .listitem img {
+            width: 100%;
+        }
+
+        .cost {
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+            float: right;
+            align-self: center;
+            margin-left: 70px;
+        }
+
+        /* button{
+            width: 10px;
+            height: 10px;
+            background-color: seagreen;
+            display: inline-block;
+        }
+        .cost>span{
+            display: inline-block;
+            width: 20px;
+            height: 10px;
+            background-color: sienna;
+        } */
+        button {
+            width: 150px;
+            height: 50px;
+            background-color: rgb(241, 99, 99);
+            border: none;
+            color: #fff;
+
+        }
+
+        .more p {
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .go-back {
+            width: 100px;
+            height: 60px;
+            background-color: royalblue;
+            margin-left: 200px;
+            line-height: 60px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <!-- <a href="./classification.html"></a> -->
     <header></header>
-    <div class="box"></div>
-    <div class="more"></div>
+    <div class="go-back">返回</div>
+    <div class="detail">
+        <div class="box"></div>
+        <div class="cost">
+            <!-- <h1>名称</h1>
+            <p>价格</p>
+            <button>加入购物车</button> -->
+        </div>
+    </div>
+    <div class="more">
+        <p>相关商品推荐</p>
+    </div>
 </body>
 <script src="../js/animation.js"></script>
 <script src="../js/request.js"></script>
@@ -92,6 +162,10 @@
     detail();
     var box = document.querySelector('.box');
     var more = document.querySelector('.more');
+    var cost = document.querySelector('.cost');
+    var go_back = document.querySelector('.go-back');
+    // 获取类型
+    var type_two;
     function detail() {
         var url = location.href;
         var res = getUrl(url);
@@ -99,7 +173,8 @@
             // res本身就是一个对象
             params: res
         }, function (data) {
-            console.log(data); 
+            console.log(data);
+            type_two = data[0].type_two;
             box.innerHTML = `
             <div class="small">
             <div class="mask"></div>
@@ -109,7 +184,14 @@
             <img src="${data[0].img_url}" alt="">
         </div>
             `
+            cost.innerHTML = `
+            <h1>${data[0].title}</h1>
+            <h3>价格:${data[0].price}</h3>
+            <button>加入购物车</button>
             
+            
+            `
+            // tab 图片
             var dataimgs = JSON.parse(data[0].imgs);
             console.log(dataimgs);
             for (var i = 0; i < dataimgs.length; i++) {
@@ -125,12 +207,38 @@
 
                 f();
                 tabimg();
+
             }
+            mores();
         })
     }
 
-    function more(){
-        
+    function mores() {
+        REQUEST.get('/search', {
+            params: {
+                word: type_two
+            }
+        }, function (data) {
+            console.log(data);
+            for (var j = 0; j < data.length; j++) {
+
+                more.innerHTML += `
+        <div class="listitem" data-id="${data[j].Id}">
+        <div class="list-img">
+        <img alt="" src="${data[j].img_list_url}">
+            </div>
+            <div class="title">
+        <p>${data[j].title}</p>
+            </div>
+            <div class="text">
+        <span class="price">￥${data[j].price}</span>
+        <span>${data[j].mack}</span>
+        </div>
+        </div>
+         `
+            }
+        })
+
     }
     // url 传参
     //file:///c:/Users/%E9%95%B7%E6%83%85/Desktop/by/view/detail.html?Id=6
@@ -187,6 +295,13 @@
             }
         }
 
+    }
+
+
+    //返回上一页
+    go_back.onclick = function () {
+        console.log("dd");
+        history.back();
     }
 </script>
 

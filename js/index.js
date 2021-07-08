@@ -37,11 +37,14 @@ window.onscroll = function () {
 
     // 判断数据触底
     if (Math.abs((window.innerHeight + top)-document.body.scrollHeight)<50) {
+        load.style.display="block";
+        page++;
         setTimeout(function () {
-            // load.style.display="block";
-            page++;
+            if(REQUEST.intercaptals.response.status === 200 && REQUEST.intercaptals.response.readyState === 4){
+                load.style.display="none";
+            }
             add(page);
-        }, 2000)
+        }, 1000)
 
     }
 }
@@ -200,4 +203,33 @@ btn.onclick=function(){
     console.log(input.value);
     var text=encodeURI(input.value)
     location.href=`./search.html?word=${text}`
+}
+
+
+// 登录
+var tokens = localStorage.getItem('token');
+console.log(tokens);
+var login=document.querySelector('.login');
+var nologin=document.querySelector('.nologin');
+var exit=document.querySelector('.exit');
+console.log(tokens);
+if(tokens==1){
+    // login
+    login.style.display='block';
+    nologin.style.display='none';
+}else{
+    login.style.display='none';
+    nologin.style.display='block';
+}
+
+exit.onclick=function(e){
+    e.preventDefault();
+    console.log("sdsds");
+    localStorage.setItem('token',0);
+    if( localStorage.getItem('token')==0){
+
+        login.style.display='none';
+        nologin.style.display='block';
+    }
+    location.href='./index.html'
 }

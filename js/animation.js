@@ -18,21 +18,28 @@ function nav() {
     var header = document.querySelector('header');
     header.innerHTML = `
     <div class="top">
-    <div class="logo">
-        <img src="../asses/images/logo.png" alt="">
-    </div>
-    <div class="search">
-        <input type="text" name="" id="" placeholder="请输入想要的商品"><button>搜索</button>
-    </div>
-</div>
-<nav>
-    <ul>
-        <li><a href="./index.html">首页</a></li>
-        <li><a href="./login.html">登录</a></li>
-        <li><a href="./register.html">注册</a></li>
-    </ul>
-</nav>
+            <div class="logo">
+                <img src="../asses/images/logo.png" alt="">
+            </div>
+            <div class="search">
+                <input type="text" name="" id="" placeholder="请输入想要的商品"><button>搜索</button>
+            </div>
+        </div>
+        <nav>
+            <ul class="nologin">
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./login.html">登录</a></li>
+                <li><a href="./register.html">注册</a></li>
+            </ul>
+            <ul class="login">
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="">购物车</a></li>
+                <li class="exit"><a href="">退出登录</a></li>
+            </ul>
+        </nav>
     `
+
+
     // var nav=document.querySelector('nav');
     // var search=document.querySelector('search');
     // window.onscroll=function(){

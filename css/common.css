@@ -75,3 +75,6 @@ nav li a{
     top: 0;
     left: 0;
 }
+.login{
+    display: none;
+}
