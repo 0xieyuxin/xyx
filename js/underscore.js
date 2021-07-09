@@ -43,3 +43,48 @@ function text(url){
     var str = decodeURI(strurl);
     return str;
 }
+
+function LOGIN(token) {
+    var login = document.querySelector('.login');
+    var nologin = document.querySelector('.nologin');
+    var exit = document.querySelector('.exit');
+    if (token) {
+        // alert("sdsdsd")
+        console.log("登上了");
+        login.style.display = 'block';
+        nologin.style.display = 'none';
+    } else {
+        login.style.display = 'none';
+        nologin.style.display = 'block';
+    }
+    exit.onclick = function (e) {
+        // e.preventDefault();
+        localStorage.removeItem('token');
+        if ((!token)) {
+
+            login.style.display = 'none';
+            nologin.style.display = 'block';
+        }
+        location.href = './index.html'
+    }
+}
+
+// 加购
+function shopadd(goodId,tokens){
+    REQUEST.get('/add',{
+        params:{
+            goodId:goodId,
+            token:tokens
+        }
+    },function(data){
+        console.log(data);
+        if(data.code===0){
+            alert("请先登录");
+        }else if(data.code===1){
+            alert('添加成功');
+        }else{
+            alert('添加失败');
+        }
+    })
+
+}

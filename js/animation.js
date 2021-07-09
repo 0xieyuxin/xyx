@@ -33,7 +33,7 @@ function nav() {
             </ul>
             <ul class="login">
                 <li><a href="./index.html">首页</a></li>
-                <li><a href="">购物车</a></li>
+                <li><a href="./shopCar.html">购物车</a></li>
                 <li class="exit"><a href="">退出登录</a></li>
             </ul>
         </nav>
@@ -52,3 +52,5 @@ function nav() {
     //     }
     // }
 }
+
+

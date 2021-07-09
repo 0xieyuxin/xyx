@@ -11,28 +11,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="top">
-            <div class="logo">
-                <img src="../asses/images/logo.png" alt="">
-            </div>
-            <div class="search">
-                <input type="text" name="" id="" placeholder="请输入想要的商品"><button>搜索</button>
-            </div>
-        </div>
-        <nav>
-            <ul class="nologin">
-                <li><a href="./index.html">首页</a></li>
-                <li><a href="./login.html">登录</a></li>
-                <li><a href="./register.html">注册</a></li>
-            </ul>
-            <ul class="login">
-                <li><a href="./index.html">首页</a></li>
-                <li><a href="">购物车</a></li>
-                <li class="exit"><a href="#">退出登录</a></li>
-            </ul>
-        </nav>
-    </header>
+    <header></header>
 
     <form action="">
         <input type="text" name="" id="user" placeholder="用户名"><span class="u"></span>
@@ -40,7 +19,7 @@
         <input type="button" value="登录" class="button">
     </form>
 </body>
-<!-- <script src="../js/animation.js"></script> -->
+<script src="../js/animation.js"></script>
 <script src="../js/request.js"></script>
 <script src="../js/login.js"></script>
 <script>
@@ -99,36 +78,16 @@
                 password: password
             }
         }, function (data) {
-            console.log(data);
-            // success
-            // var token = data.token;
-            localStorage.setItem('token', data.code);
-            // setTimeout(function () {
+            localStorage.setItem('token', data.token);
                 location.href = './index.html'
-            // }, 1000)
-            // 登录后才可以用  将token 传入本地中
         })
-        // token();
+
     }
+
+    //  获取所有的li  给第一个li加border
+var lis = document.querySelectorAll('header ul li');
+lis[1].classList.add('bottom');
 </script>
 
-
-<script>
-
-    function token() {
-        var tokens = localStorage.getItem('token');
-        var login=document.querySelector('.login');
-        var nologin=document.querySelector('.nologin');
-        console.log(tokens);
-        if(tokens){
-            // login
-            login.style.display='block';
-            nologin.style.display='none';
-        }else{
-            login.style.display='none';
-            nologin.style.display='block';
-        }
-    }
-</script>
 
 </html>

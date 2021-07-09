@@ -3,11 +3,15 @@ nav();
 // 商品列表
 var shopList = document.querySelector('.shopList');
 var back = document.querySelector('.back');
-var input=document.querySelector('.search input');
-var btn=document.querySelector('.search button');
-var load=document.querySelector('.load');
+var input = document.querySelector('.search input');
+var btn = document.querySelector('.search button');
+var load = document.querySelector('.load');
 // 点击 获取当前点击的文字
 var navlist = document.querySelector('.navlist');
+
+//  获取所有的li  给第一个li加border
+var lis = document.querySelectorAll('header ul li');
+lis[0].classList.add('bottom');
 var page = 1;
 add(page);
 
@@ -16,7 +20,6 @@ window.onscroll = function () {
     // 返回顶部
     top > 10 ? back.style.display = 'block' : back.style.display = 'none';
     back.onclick = function () {
-        // anmations(window, 0)
         var t = setInterval(function () {
             top = top - 30;
             document.documentElement.scrollTop = top
@@ -26,26 +29,15 @@ window.onscroll = function () {
         }, 16.5)
     }
 
-    // 图片懒加载
-    var img = document.querySelectorAll('.list-img img');
-    var imgs = img[img.length - 1];
-    for (var i = 0; i < img.length; i++) {
-        if (window.innerHeight + top >= img[i].offsetTop) {
-            img[i].src = img[i].dataset.src;
-        }
-    }
+    lazy();
 
     // 判断数据触底
-    if (Math.abs((window.innerHeight + top)-document.body.scrollHeight)<50) {
-        load.style.display="block";
+
+    if (Math.abs((window.innerHeight + top) - document.body.scrollHeight) < 50) {
         page++;
-        setTimeout(function () {
-            if(REQUEST.intercaptals.response.status === 200 && REQUEST.intercaptals.response.readyState === 4){
-                load.style.display="none";
-            }
+        var s = setTimeout(function () {
             add(page);
         }, 1000)
-
     }
 }
 function add(page) {
@@ -73,14 +65,13 @@ function add(page) {
         `
             shopList.innerHTML = html;
         }
+        lazy();
         var items = document.querySelectorAll('.listitem');
         for (let i = 0; i < items.length; i++) {
             items[i].onclick = function (e) {
                 console.log("sdf");
                 //  获取当前点击的自定义属性
                 var id = items[i].getAttribute('data-id');
-
-                // var id=e.target.dataset.id;
                 location.href = `./detail.html?goodId=${id}`;
             }
         }
@@ -98,10 +89,9 @@ for (var i = 0; i < lis.length; i++) {
         e.preventDefault();
         list = this.innerHTML;
         console.log(list);
-        list=encodeURI(list)
-        location.href=`./classification.html?type_one=${list}`
+        list = encodeURI(list)
+        location.href = `./classification.html?type_one=${list}`
     }
-
 }
 
 //轮播图
@@ -198,38 +188,46 @@ function change() {
 swipers();
 
 
-// 搜索
-btn.onclick=function(){
-    console.log(input.value);
-    var text=encodeURI(input.value)
-    location.href=`./search.html?word=${text}`
+// 搜索 跳转搜索页
+btn.onclick = function () {
+    var text = encodeURI(input.value)
+    location.href = `./search.html?word=${text}`
 }
 
 
 // 登录
 var tokens = localStorage.getItem('token');
-console.log(tokens);
-var login=document.querySelector('.login');
-var nologin=document.querySelector('.nologin');
-var exit=document.querySelector('.exit');
-console.log(tokens);
-if(tokens==1){
-    // login
-    login.style.display='block';
-    nologin.style.display='none';
-}else{
-    login.style.display='none';
-    nologin.style.display='block';
+function LOGIN(token) {
+    var login = document.querySelector('.login');
+    var nologin = document.querySelector('.nologin');
+    var exit = document.querySelector('.exit');
+    if (token) {
+        console.log("登上了");
+        login.style.display = 'block';
+        nologin.style.display = 'none';
+    } else {
+        login.style.display = 'none';
+        nologin.style.display = 'block';
+    }
+    exit.onclick = function (e) {
+        localStorage.removeItem('token');
+        if ((!token)) {
+
+            login.style.display = 'none';
+            nologin.style.display = 'block';
+        }
+        location.href = './index.html'
+    }
 }
 
-exit.onclick=function(e){
-    e.preventDefault();
-    console.log("sdsds");
-    localStorage.setItem('token',0);
-    if( localStorage.getItem('token')==0){
-
-        login.style.display='none';
-        nologin.style.display='block';
+LOGIN(tokens);
+// 图片懒加载
+function lazy() {
+    var img = document.querySelectorAll('.list-img img');
+    for (var i = 0; i < img.length; i++) {
+        if (window.innerHeight + document.documentElement.scrollTop >= img[i].offsetTop) {
+            img[i].src = img[i].dataset.src;
+        }
     }
-    location.href='./index.html'
+
 }

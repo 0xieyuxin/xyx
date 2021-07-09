@@ -15,7 +15,7 @@
 
     <form action="">
         <input type="text" name="" id="user" placeholder="用户名"><span class="u">4到16位（字母，数字，下划线，减号</span>
-        <input type="text" name="" id="pwd" placeholder="密码"><span class="p">不能是纯数字或者纯字母，不能包含特殊字符，密码长度在6~16位之间</span>
+        <input type="text" name="" id="pwd" placeholder="密码"><span class="p">不能是纯数字或者纯字母，不能包含特殊字符，密码长度为6~16位</span>
         <input type="button" value="注册" class="button">
     </form>
 </body>
@@ -89,7 +89,9 @@
             }
         })
     }
-
+//  获取所有的li  给第一个li加border
+var lis = document.querySelectorAll('header ul li');
+lis[2].classList.add('bottom');
 
 </script>
 

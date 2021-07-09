@@ -1,11 +1,10 @@
 /* 导航条 */
 .navlist{
-    width: 1200px;
-    margin: auto;
+    width: 1000px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 15px;
-    margin-top: 20px;
+    margin: 20px auto;
 
 }
 .navlist li a{
@@ -15,7 +14,7 @@
 
 /*  轮播图 */
 .swiper{
-    width: 1200px;
+    width: 1000px;
     height: 500px;
     margin: auto;
     border-radius: 20px;
@@ -35,6 +34,11 @@
     position: absolute;
     top: 50%;
     margin-top: -20px;
+}
+.swiper img{
+    width: 1000px;
+    height: 500px;
+
 }
 .prev{
     left: 0;
@@ -61,16 +65,24 @@
 
 /* 商品列表 */
 .shopList{
-    width: 1200px;
+    width: 1000px;
     margin:30px auto 0;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
 }
 .listitem{
+    display: inline-block;
+    border-radius: 10px;
     width: 230px;
     border: 1px solid #e4e4e4;
     margin-bottom: 20px;
+    transition: all .3s;
+    margin: 5px 5px;
+    overflow: hidden;
+
+}
+
+.listitem:hover{
+    transform: translateY(-3px);
+    box-shadow: 2px 2px 15px rgb(190, 189, 189);
 }
 .title{
     padding: 5px;
@@ -101,9 +113,10 @@
     right: 50px;
     bottom: 50px;
     display: none;
-    color: #fff;
+    color: rgb(197, 197, 197);
     text-align: center;
     line-height: 100px;
+    z-index: 20;
 }
 
 /* 加载 */

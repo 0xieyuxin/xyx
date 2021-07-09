@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,25 +8,29 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/common.css">
 </head>
-
 <body>
     <div class="back">返回顶部</div>
     <header>
         <!-- <div class="top">
-                <div class="logo">
-                    <img src="../asses/images/logo.png" alt="">
-                </div>
-                <div class="search">
-                    <input type="text" name="" id="" placeholder="请输入想要的商品"><button>搜索</button>
-                </div>
+            <div class="logo">
+                <img src="../asses/images/logo.png" alt="">
             </div>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">首页</a></li>
-                    <li><a href="./login.html">登录</a></li>
-                    <li><a href="./register.html">注册</a></li>
-                </ul>
-            </nav> -->
+            <div class="search">
+                <input type="text" name="" id="" placeholder="请输入想要的商品"><button>搜索</button>
+            </div>
+        </div>
+        <nav>
+            <ul class="nologin">
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./login.html">登录</a></li>
+                <li><a href="./register.html">注册</a></li>
+            </ul>
+            <ul class="login">
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./shopCar.html">购物车</a></li>
+                <li class="exit"><a href="">退出登录</a></li>
+            </ul>
+        </nav> -->
     </header>
     <!--  导航条 -->
     <nav class="navlist">
@@ -39,7 +42,6 @@
         <li><a href="">眼镜</a></li>
         <li><a href="">鞋靴</a></li>
     </nav>
-
     <!-- 轮播图 -->
     <div class="swiper">
         <ul>
@@ -54,29 +56,31 @@
         <span class="next"></span>
         <ul class="circle"></ul>
     </div>
-
     <!-- 整个商品列表 -->
-    <div class="shopList">
-        <!-- <div class="listitem">
-            <div class="list-img">
-                <img src="../asses/images/loading.jpg" alt="">
-            </div>
-            <div class="title">
-                <p>咖啡</p>
-            </div>
-            <div class="text">
-                <span class="price">39</span>
-                <span class="one">一起</span>
-            </div>
-        </div> -->
-    </div>
-    <div class="load">
+    <div class="shopList"></div>
+    <!-- <div class="load">
         <img src="../asses/images/loading.jpg" alt="">
-    </div>
-    <!-- 返回顶部 -->
+    </div> --> 
 </body>
 <script src="../js/animation.js"></script>
 <script src="../js/request.js"></script>
 <script src="../js/index.js"></script>
+<script src="../js/underscore.js"></script>
+<!-- <script>
 
+    var nav=document.querySelector('header nav');
+    var search_input=document.querySelector('.search');
+    window.onscroll=function(){
+        if(document.documentElement.scrollTop>100){
+            // nav.style.position='fixed'
+            nav.className="fix";
+            search_input.className="inputmove"
+        }else{
+            nav.className=""
+            search_input.className=""
+
+        }
+    }
+ 
+</script> -->
 </html>
