@@ -6,6 +6,7 @@ var back = document.querySelector('.back');
 var input = document.querySelector('.search input');
 var btn = document.querySelector('.search button');
 var load = document.querySelector('.load');
+var f = 1;
 // 点击 获取当前点击的文字
 var navlist = document.querySelector('.navlist');
 
@@ -34,11 +35,29 @@ window.onscroll = function () {
     // 判断数据触底
 
     if (Math.abs((window.innerHeight + top) - document.body.scrollHeight) < 50) {
-        page++;
-        var s = setTimeout(function () {
+        if(f){
+            load.style.display="block"
+            f=0;
+            page++;
+        }
+        setTimeout(function () {
+            load.style.display="none";
             add(page);
+            f=1;
         }, 1000)
     }
+    // if (f) {
+    //     if (Math.abs((window.innerHeight + top) - document.body.scrollHeight) < 50) {
+    //         load.style.display = "block"
+    //         f = 0;
+    //         page++;
+    //     }
+    //     setTimeout(function () {
+    //         load.style.display = "none";
+    //         add(page);
+    //         f = 1;
+    //     }, 1000)
+    // }
 }
 function add(page) {
     REQUEST.get('/goodlist', {

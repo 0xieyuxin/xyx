@@ -63,7 +63,15 @@
 
         .cotatlprice {
             color: red;
-            padding-right: 20px;
+        }
+
+        .del {
+            text-align: center;
+            margin-right: 20px;
+            border: 1px solid rgb(177, 176, 176);
+            border-radius: 10px;
+            padding: 2px 10px;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -71,21 +79,7 @@
 <body>
     <header></header>
 
-    <div class="shopcar">
-        <!-- <div class="shop-list">
-            <div class="shop-img"> <img src="../asses/images/loading.jpg" alt=""></div>
-            <div class="introduce">
-                <p class="shop-title">fdfdfdfdfdfdfdfdfdf</p>
-                <p class="shop-text">fdfdfsdfsdfsdfdsfsdsfdfd</p>
-            </div>
-            <p class="price">59</p>
-            <div class="shop-count">
-                <span>-</span>
-                <span class="count">2</span>
-                <span>+</span>
-            </div>
-        </div> -->
-    </div>
+    <div class="shopcar"></div>
 </body>
 <script src="../js/animation.js"></script>
 <script src="../js/request.js"></script>
@@ -123,6 +117,7 @@
                     <span class="add">+</span>
                 </div>
                 <p class="cotatlprice">￥${data[i].count * data[i].price}</p>
+                <div class="del">删除</div>
             </div>
             `
 
@@ -141,8 +136,8 @@
                             var p = e.target.parentNode.previousElementSibling.innerHTML;
                             // console.log(p);
                             e.target.nextElementSibling.innerHTML--;
-                            e.target.parentNode.nextElementSibling.innerHTML ='￥'+ e.target.nextElementSibling.innerHTML * p
-                            if (e.target.nextElementSibling.innerHTML == 0) {
+                            e.target.parentNode.nextElementSibling.innerHTML = '￥' + e.target.nextElementSibling.innerHTML * p
+                            if (e.target.nextElementSibling.innerHTML <1) {
                                 REQUEST.get('/del', {
                                     params: {
                                         token: tokens,
@@ -172,27 +167,33 @@
                         if (data.code === 1) {
                             var p = e.target.parentNode.previousElementSibling.innerHTML;
                             e.target.previousElementSibling.innerHTML++;
-                            e.target.parentNode.nextElementSibling.innerHTML ='￥'+ e.target.previousElementSibling.innerHTML * p;
+                            e.target.parentNode.nextElementSibling.innerHTML = '￥' + e.target.previousElementSibling.innerHTML * p;
 
                             // console.log( e.target.parentNode.getAttribute('data-Id')
                             // );
                             // location.reload()
                         }
                     })
-
-                    // REQUEST.get('/shoplist', {
-                    //     params: {
-                    //         token: tokens
-                    //     }
-                    // }, function (data) {
-                    //     console.log(data);
-                    // })
-                    // var p= e.target.parentNode.previousElementSibling.innerHTML;
-                    // e.target.previousElementSibling.innerHTML++;
-                    // e.target.parentNode.nextElementSibling.innerHTML=e.target.previousElementSibling.innerHTML*p;
                 }
             }
 
+
+            var del = document.querySelector('.del');
+            del.onclick = function (e) {
+                REQUEST.get('/del', {
+                    params: {
+                        token: tokens,
+                        goodId: shop_id
+                    }
+                }, function (data) {
+                    // console.log(data);
+                    // console.log(e.target.parentNode.parentNode);
+                    if (data.code == 1) {
+
+                        e.target.parentNode.remove();
+                    }
+                })
+            }
 
         }
     })
